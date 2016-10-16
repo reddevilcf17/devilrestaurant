@@ -1,0 +1,15 @@
+<div class="notice"></div>
+
+<div class="checkout">
+  <%= render 'orders/checkout_form' %>
+</div>
+
+
+<div class="user_info">
+  <% if @order.order_status == 1 %>
+    <%= render 'orders/user_info_complete' %>
+  <% else %>
+    <%= render 'orders/user_info' %>
+  <% end %>
+
+</div>

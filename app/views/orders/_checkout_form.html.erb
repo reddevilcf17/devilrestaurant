@@ -1,0 +1,58 @@
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Food Item</th>        
+        <th>Quantity</th>
+        <th>Price (VND)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order.order_items.each do |order_item| %>
+        <tr>
+          <td><%= order_item.food_item.name %></td>          
+          <td><%= order_item.quantity %></td>
+          <td><%= number_to_currency(order_item.food_item.price, unit: "", separator: ".", delimiter: ",") %></td>
+        </tr>
+      <% end %>
+
+      <tr>
+        <td>        
+        </td>
+        <td>
+          Delivery
+        </td>
+        <td>
+          <%= number_to_currency(@order.delivery_fee, unit: "", separator: ".", delimiter: ",") %>
+        </td>
+      </tr>
+
+      <tr>
+        <td>   
+          Coupon     
+        </td>
+        <td>
+          <%= form_tag apply_coupon_path, remote: true, :class => 'form-inline' do %>
+              <div class="form-group">        
+                <%= text_field_tag :apply_coupon, params[:apply_coupon], class:'form-control', placeholder:'Enter coupon code', type:'text', value: @order.coupon, disabled: @order.order_status == 1 ? true : false %>
+                <%= submit_tag("Apply", :class=>"btn btn-primary", disabled: @order.order_status == 1 ? true : false) %>
+              </div>    
+            <% end %>
+        </td>
+        <td>
+          Giảm <%= @order.coupon_ratio * 100 %> %
+        </td>
+      </tr>
+
+      <tr>
+        <td>        
+        </td>
+        <td>
+          Total
+        </td>
+        <td>
+          <%= number_to_currency(@order.total + @order.delivery_fee - (@order.total * @order.coupon_ratio), unit: "", separator: ".", delimiter: ",") %>
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>

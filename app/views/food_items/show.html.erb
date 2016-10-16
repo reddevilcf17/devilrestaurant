@@ -1,0 +1,28 @@
+<%= render '/food_items/food_item_detail' %>
+<div class="row container">		
+	<div class="list-group jumbotron">
+		<div class="container">
+			<h6>Score: <% (1..(@food_item.comments.sum{ |a| a.star }.to_i / @food_item.comments.count).to_i).each do
+			%>
+					<i class="fa fa-star star-score"></i>
+				<% end %>
+			</h6>
+			<h6>Comments (<%= @food_item.comments.count %>)</h6>
+			 
+			<br/>
+			<% @food_item.comments.each do |comment| %>
+				<h6 class="list-group-item-heading"><%= comment.name %></h6>
+	    		<p class="list-group-item-text text-muted small"><%= comment.body %></p>
+	    		<hr/>
+			<% end %>
+			<br/>
+			<br/>
+			Leave a comment:
+			<div class="row">
+				<div class="col-sm-6">
+					<%= render 'comments/comment_form' %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

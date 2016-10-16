@@ -1,0 +1,4 @@
+
+<% @sections.each do |section| %>
+	$(".section-content").html("<%= escape_javascript(render 'home/section', food_items: section.food_items) %>")
+<% end %>

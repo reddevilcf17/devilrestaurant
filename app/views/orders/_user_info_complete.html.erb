@@ -1,0 +1,9 @@
+<div class="card card-block">
+  <h4 class="card-title">Order info</h4>
+  <p class="card-text">Status: Waiting for delivery (Pay with cash upon delivery)</p>
+  <p class="card-text">Name: <%= @order.name %></p>
+  <p class="card-text">Phone number: <%= @order.phone_number %></p>
+  <p class="card-text">Email: <%= @order.email %></p>
+  <p class="card-text">Delivery address: <%= @order.address %></p>
+  <p class="card-text">Created at: <%= @order.created_at.to_datetime %></p>
+</div>

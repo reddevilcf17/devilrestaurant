@@ -1,0 +1,29 @@
+
+
+<div class="card">
+  <div class="card-block">
+  	<div class="row">
+		<div class="col-md-3">
+			<h4 class="card-title"><%= @food_item.name %></h4>					
+			<h6 class="card-subtitle text-muted"><%= @food_item.impressionist_count %> view<%= 's' if @food_item.impressionist_count > 1 %></h6>
+		</div>
+		<div class="col-md-3">
+			<span class="tag tag-pill tag-default"><%= number_to_currency(@food_item.price, unit: "VND ", separator: ".", delimiter: ",") %></span>
+		</div>
+	</div>
+    
+    <br/>
+    <%= form_for @order_item, remote: true, :class => 'form-group form-inline' do |f| %>
+   
+        	<%= f.number_field :quantity, value: 1, class: "", min: 1 %>
+          	<%= f.hidden_field 'food_item_id', value: @food_item.id %>
+          	<%= f.submit("Order", :class=>"btn btn-primary") %>
+
+    <% end %>
+  </div>
+  <%= image_tag @food_item.image_url, class: 'card-img-top' %>
+  <div class="card-block">
+    <p class="card-text"><%= @food_item.description %></p>
+    
+  </div>
+</div>
