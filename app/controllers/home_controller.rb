@@ -33,6 +33,7 @@ class HomeController < ApplicationController
 		else
 			@food_items = FoodItem.all
 		end
+		@order_item = current_order.order_items.new
 	end
 
 	def contact_us
