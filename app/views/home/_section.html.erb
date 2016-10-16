@@ -1,4 +1,5 @@
-<% if @sort == "1" %>
+'sort = ' <%= @sort %>
+<% if @sort == "1" %>	
 	<% @new_food_items = food_items.sort { |a, b| a.name <=> b.name } %>
 <% elsif @sort == "2" %>
 	<% @new_food_items = food_items.sort { |a, b| a.price <=> b.price } %>

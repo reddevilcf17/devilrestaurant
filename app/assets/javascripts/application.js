@@ -17,3 +17,11 @@
 //= require tether
 //= require bootstrap
 //= require custom
+
+$(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
+    var tab = $(e.target);
+    var contentId = tab.attr("href");
+    console.log('gia tri:' + $('#current_tab').val());
+    $('#current_tab').val(contentId);
+
+});

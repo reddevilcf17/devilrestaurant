@@ -4,6 +4,7 @@
 			<div class="form-group">
 				<%= form_tag menu_path, method: 'get', remote: true, :class => 'form-inline' do %>
 				  <%= select_tag "sort", options_for_select([ ["Sort", 0], ["Alphabetical", 1], ["Price low to high", 2], ["Price high to low", 3], ["Most viewed", 4]], @sort), class: 'form-control' %>
+				  <%= hidden_field_tag 'current_tab', "\##{@sections.first.name}" %>
 					<%= submit_tag("Apply", :class=>"btn btn-primary") %>
 				<% end %>
 			</div>
@@ -15,7 +16,7 @@
 			<ul class="nav nav-tabs" role="tablist">
 				<% @sections.each do |section| %>
 					<li class="nav-item">
-						<a class="nav-link <%= 'active' if section == @sections.first %>" data-toggle="tab" href="#<%= section.name %>" role="tab"><%= section.name %></a>
+						<a class="nav-link <%= 'active' if section == @sections.find_by_name!(@current_tab) %>" data-toggle="tab" href="#<%= section.name %>" role="tab"><%= section.name %></a>
 					</li>
 				<% end %>
 			</ul>
@@ -24,13 +25,8 @@
 
 
 	<!-- Tab panes -->
-	<div class="tab-content">
-		<% @sections.each do |section| %>
-			<div class="section-content tab-pane <%= 'active' if section == @sections.first %>" id="<%= section.name %>" role="tabpanel">		
-				<%= render 'home/section', food_items: section.food_items %>
-			</div>
-
-		<% end %>
+	<div class="tab-content section-content">
+		<%= render 'home/show_tab'%>
 	</div>
 
 </div>

@@ -10,6 +10,11 @@ class HomeController < ApplicationController
 		@sort = params[:sort]
 	    @order_item = current_order.order_items.new
 
+	    @current_tab = @sections.first.name
+	    if params[:current_tab]
+	    	@current_tab = params[:current_tab][1..params[:current_tab].length]
+	    end
+
 	    # @current_section = 0
 	    # if session[:current_section].nil?
 	    # 	session[:order_id] = 0
