@@ -2,11 +2,11 @@
 
 **Devil Restaurant** is a Ruby on Rails restaurant website let users order foods.
 
-Submitted by: **Your Name**
+Submitted by: **Nguyen Thanh Hung**
 
 Time spent: **17** hours spent in total
 
-URL: **heroku-app-url**
+URL: **https://devilrestaurant.herokuapp.com/**
 
 ## User Stories
 
