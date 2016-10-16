@@ -1,0 +1,58 @@
+<% @sections.each do |section| %>
+	<div class="section-content tab-pane <%= 'active' if section == @sections.find_by_name!(@current_tab) %>" id="<%= section.name %>" role="tabpanel">		
+
+
+		<% if @sort == "1" %>	
+			<% @new_food_items = section.food_items.sort { |a, b| a.name <=> b.name } %>
+		<% elsif @sort == "2" %>
+			<% @new_food_items = section.food_items.sort { |a, b| a.price <=> b.price } %>
+		<% elsif @sort == "3" %>
+			<% @new_food_items = section.food_items.sort { |a, b| b.price <=> a.price } %>
+		<% elsif @sort == "4" %>
+			<% @new_food_items = section.food_items.sort { |a, b| b.impressionist_count <=> a.impressionist_count } %>
+		<% else %>
+			<% @new_food_items = section.food_items %>
+		<% end %>
+
+		<% @new_food_items.each do |food_item| %>
+			<div class="row food_item">
+				<div class="col-md-3">
+					<%= image_tag food_item.image_url %>
+				</div>
+				<div class="col-md-9">
+					<div class="row">
+						<div class="col-md-6">
+							<h4 class="card-title"><%= food_item.name %></h4>					
+						</div>
+						<div class="col-md-3">
+							<span class="tag tag-pill tag-default"><%= number_to_currency(food_item.price, unit: "VND ", separator: ".", delimiter: ",") %></span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<p class="card-text text-muted"><%= food_item.description[0..200] + (food_item.description.length > 200 ? '...' : '').to_s %></p>
+						</div>				
+					</div>	
+					<div class="row">
+						<%= link_to "Detail (#{food_item.impressionist_count} view#{'s' if food_item.impressionist_count > 1})", food_item_path(food_item), class: "btn btn-link" %>
+					</div>
+					<%= form_for @order_item, remote: true do |f| %>
+		   					<div class="form-group row">	
+		   						<div class="col-md-2">
+		   							<%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>	
+		   						</div>		            	
+				              	<%= f.hidden_field 'food_item_id', value: food_item.id %>
+				              	<div class="col-md-5">
+				              		<%= f.submit("Add to Cart", :class=>"btn btn-primary form-control") %>	
+				              	</div>		              	
+							</div>
+			        <% end %>
+					
+				</div>		
+			</div>	
+			<hr/>
+		<% end %>
+
+	</div>
+
+<% end %>
