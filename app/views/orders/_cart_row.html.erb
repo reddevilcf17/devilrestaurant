@@ -6,22 +6,52 @@
     </div>
     <div class="col-xs-4">
       
-      <%= form_for order_item, remote: true do |f| %>
-        <h4 class="text-right">Price: <span style="color: green"><%= number_to_currency(order_item.food_item.price, unit: "VND ", separator: ".", delimiter: ",") %></span></h4>
-        <div class="row">
-          <div class="col-xs-4">
-            <%= f.number_field :quantity, value: order_item.quantity.to_i, class: "form-control", min: 1 %>
-            <%= f.hidden_field :food_item_id, value: food_item.id %>
-          </div>
-          <div class="col-xs-8 text-right">
-            <div class="btn-group">
-              <%= f.submit "Update Quantity", class: "btn btn-primary" %>
-              <%= link_to "Delete", order_item, { data: { confirm: "Are you sure you wish to delete the product '#{order_item.food_item.name}' from your cart?" }, method: :delete, remote: true, class: "btn btn-danger" } %>
-            </div>
-          </div>
-        </div>
-      <% end %>
+      
     </div>
     
   </div>
 </div>
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Food Item</th>        
+        <th>Quantity</th>
+        <th>Price (VND)</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+          <td><%= order_item.food_item.name %></td>          
+          
+          
+
+            <%= form_for order_item, remote: true do |f| %>        
+
+          <td>
+            <div class="form-group row">  
+              <div class="col-md-4">
+                <%= f.number_field :quantity, value: order_item.quantity.to_i, class: "form-control", min: 1 %>
+              </div>
+            </div>
+          </td>
+          <td><%= number_to_currency(order_item.food_item.price, unit: "", separator: ".", delimiter: ",") %></td>
+            <%= f.hidden_field :food_item_id, value: food_item.id %>
+<td>
+
+            <div class="btn-group">
+              <%= f.submit "Update Quantity", class: "btn btn-primary" %>
+              <%= link_to "Delete", order_item, { data: { confirm: "Are you sure you wish to delete the product '#{order_item.food_item.name}' from your cart?" }, method: :delete, remote: true, class: "btn btn-danger" } %>
+            </div>
+            </td>
+      <% end %>
+
+        </tr>
+      
+    </tbody>
+  </table>
+
+
+

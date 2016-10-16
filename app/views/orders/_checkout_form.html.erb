@@ -31,7 +31,7 @@
           Coupon     
         </td>
         <td>
-          <%= form_tag apply_coupon_path, remote: true, :class => 'form-inline' do %>
+          <%= form_tag apply_coupon_path, method: 'get', remote: true, :class => 'form-inline' do %>
               <div class="form-group">        
                 <%= text_field_tag :apply_coupon, params[:apply_coupon], class:'form-control', placeholder:'Enter coupon code', type:'text', value: @order.coupon, disabled: @order.order_status == 1 ? true : false %>
                 <%= submit_tag("Apply", :class=>"btn btn-primary", disabled: @order.order_status == 1 ? true : false) %>

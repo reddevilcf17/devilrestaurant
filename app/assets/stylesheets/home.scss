@@ -1,6 +1,17 @@
 
+body {
+    background-image: url("https://www.myeloma.org.uk/wp-content/themes/flyingnews/images/myeloma_img/halloween-background.jpg");
+    background-color: #cccccc;
+}
 
+.home-panel, .jumbotron{
+    opacity: 0.8;
+    margin-top: 20px;
+}
 
+.display-restaurant-name{
+    color: red;
+}
 
 .contact-info {
 	text-align: center;
@@ -31,6 +42,8 @@
 }
 
 .food_item {
+    margin-top: 10px;
+
 	img {
 		width: 100%;
 	}

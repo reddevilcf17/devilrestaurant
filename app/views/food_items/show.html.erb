@@ -2,7 +2,7 @@
 <div class="row container">		
 	<div class="list-group jumbotron">
 		<div class="container">
-			<h6>Score: <% (1..(@food_item.comments.sum{ |a| a.star }.to_i / @food_item.comments.count).to_i).each do
+			<h6>Score: <% (1..(@food_item.comments.count > 0 ? (@food_item.comments.sum{ |a| a.star }.to_i / @food_item.comments.count) : 1).to_i).each do
 			%>
 					<i class="fa fa-star star-score"></i>
 				<% end %>

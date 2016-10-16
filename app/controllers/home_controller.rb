@@ -27,6 +27,7 @@ class HomeController < ApplicationController
 	end
 
 	def search
+		puts "vao search"
 		if params[:search]
 			@food_items = FoodItem.search(params[:search])
 		else
